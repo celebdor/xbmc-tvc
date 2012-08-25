@@ -119,15 +119,71 @@ def show_homepage():
     ]
     return plugin.add_items(items)
 
-
 @plugin.route('/live/')
 def watch_live():
+    items = [
+        # TV3
+        {'label': plugin.get_string(30400),
+         'url': plugin.url_for('watch_TV3')},
+        # 33
+        {'label': plugin.get_string(30401),
+         'url': plugin.url_for('watch_33')},
+        # 3/24
+        {'label': plugin.get_string(30402),
+         'url': plugin.url_for('watch_324')},
+        # TV3CAT
+        {'label': plugin.get_string(30403),
+         'url': plugin.url_for('watch_TV3CAT')},
+    ]
+    return plugin.add_items(items)
+
+@plugin.route('/live/TV3/')
+def watch_TV3():
+    streamurl = 'stream_TV3_FLV'
+    swfurl = 'http://www.tv3.cat/ria/players/3ac/i360/Main.swf'
+    pageurl = 'http://www.tv3.cat/3alacarta/#/directes/TV3'
+    rtmpurl = 'rtmp://tv-nogeo-flashlivefs.fplive.net:1935/tv-nogeo-flashlive-live'
+    rtmpurl += '/%s swfurl=%s pageurl=%s tcurl=%s live=true' % (streamurl, swfurl, pageurl, rtmpurl)
+    li = xbmcgui.ListItem('TV3 Live')
+    xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER).play(rtmpurl, li)
+    # Return an empty list so we can test with plugin.crawl() and
+    # plugin.interactive()
+    return []
+
+@plugin.route('/live/33/')
+def watch_33():
+    streamurl = 'stream_33D_FLV'
+    swfurl = 'http://www.tv3.cat/ria/players/3ac/i360/Main.swf'
+    pageurl = 'http://www.tv3.cat/3alacarta/#/directes/33'
+    rtmpurl = 'rtmp://tv-nogeo-flashlivefs.fplive.net:1935/tv-nogeo-flashlive-live'
+    rtmpurl += '/%s swfurl=%s pageurl=%s tcurl=%s live=true' % (streamurl, swfurl, pageurl, rtmpurl)
+    li = xbmcgui.ListItem('33 Live')
+    xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER).play(rtmpurl, li)
+    # Return an empty list so we can test with plugin.crawl() and
+    # plugin.interactive()
+    return []
+
+@plugin.route('/live/324/')
+def watch_324():
     streamurl = 'stream_324_FLV'
     swfurl = 'http://www.tv3.cat/ria/players/3ac/i360/Main.swf'
     pageurl = 'http://www.tv3.cat/3alacarta/#/directes/324'
     rtmpurl = 'rtmp://tv-nogeo-flashlivefs.fplive.net:1935/tv-nogeo-flashlive-live'
     rtmpurl += '/%s swfurl=%s pageurl=%s tcurl=%s live=true' % (streamurl, swfurl, pageurl, rtmpurl)
     li = xbmcgui.ListItem('324 Live')
+    xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER).play(rtmpurl, li)
+    # Return an empty list so we can test with plugin.crawl() and
+    # plugin.interactive()
+    return []
+
+@plugin.route('/live/TV3CAT/')
+def watch_TV3():
+    streamurl = 'stream_TV3CAT_FLV'
+    swfurl = 'http://www.tv3.cat/ria/players/3ac/i360/Main.swf'
+    pageurl = 'http://www.tv3.cat/3alacarta/#/directes/TV3CAT'
+    rtmpurl = 'rtmp://tv-nogeo-flashlivefs.fplive.net:1935/tv-nogeo-flashlive-live'
+    rtmpurl += '/%s swfurl=%s pageurl=%s tcurl=%s live=true' % (streamurl, swfurl, pageurl, rtmpurl)
+    li = xbmcgui.ListItem('TV3CAT Live')
     xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER).play(rtmpurl, li)
     # Return an empty list so we can test with plugin.crawl() and
     # plugin.interactive()
