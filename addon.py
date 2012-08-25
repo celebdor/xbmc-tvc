@@ -26,8 +26,8 @@ except ImportError:
     import simplejson as json
 
 
-PLUGIN_NAME = 'AlJazeera'
-PLUGIN_ID = 'plugin.video.aljazeera'
+PLUGIN_NAME = '3 a la carta'
+PLUGIN_ID = 'plugin.video.tvc'
 
 
 plugin = Plugin(PLUGIN_NAME, PLUGIN_ID, __file__)
@@ -111,19 +111,23 @@ def show_homepage():
         {'label': plugin.get_string(30100),
          'url': plugin.url_for('watch_live')},
         # News Clips
-        {'label': plugin.get_string(30101),
-         'url': plugin.url_for('show_clip_categories')},
+        #{'label': plugin.get_string(30101),
+        # 'url': plugin.url_for('show_clip_categories')},
         # Programs
-        {'label': plugin.get_string(30102),
-         'url': plugin.url_for('show_program_categories')},
+        #{'label': plugin.get_string(30102),
+        # 'url': plugin.url_for('show_program_categories')},
     ]
     return plugin.add_items(items)
 
 
 @plugin.route('/live/')
 def watch_live():
-    rtmpurl = 'rtmp://aljazeeraflashlivefs.fplive.net:1935/aljazeeraflashlive-live/aljazeera_english_1 live=true'
-    li = xbmcgui.ListItem('AlJazeera Live')
+    streamurl = 'stream_324_FLV'
+    swfurl = 'http://www.tv3.cat/ria/players/3ac/i360/Main.swf'
+    pageurl = 'http://www.tv3.cat/3alacarta/#/directes/324'
+    rtmpurl = 'rtmp://tv-nogeo-flashlivefs.fplive.net:1935/tv-nogeo-flashlive-live/?ovpfv=1.1'
+    rtmpurl += '/%s swfUrl=%s pageUrl=%s' % (streamurl, swfurl, pageurl)
+    li = xbmcgui.ListItem('324 Live')
     xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER).play(rtmpurl, li)
     # Return an empty list so we can test with plugin.crawl() and
     # plugin.interactive()
