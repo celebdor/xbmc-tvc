@@ -125,14 +125,13 @@ def watch_live():
     streamurl = 'stream_324_FLV'
     swfurl = 'http://www.tv3.cat/ria/players/3ac/i360/Main.swf'
     pageurl = 'http://www.tv3.cat/3alacarta/#/directes/324'
-    rtmpurl = 'rtmp://tv-nogeo-flashlivefs.fplive.net:1935/tv-nogeo-flashlive-live/?ovpfv=1.1'
-    rtmpurl += '/%s swfUrl=%s pageUrl=%s' % (streamurl, swfurl, pageurl)
+    rtmpurl = 'rtmp://tv-nogeo-flashlivefs.fplive.net:1935/tv-nogeo-flashlive-live'
+    rtmpurl += '/%s swfurl=%s pageurl=%s tcurl=%s live=true' % (streamurl, swfurl, pageurl, rtmpurl)
     li = xbmcgui.ListItem('324 Live')
     xbmc.Player(xbmc.PLAYER_CORE_DVDPLAYER).play(rtmpurl, li)
     # Return an empty list so we can test with plugin.crawl() and
     # plugin.interactive()
     return []
-
 
 def only_clip_categories(s):
     return s.find("SelectProgInfo('Selected');") > -1
