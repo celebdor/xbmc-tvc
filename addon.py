@@ -177,7 +177,7 @@ def watch_324():
     return []
 
 @plugin.route('/live/TV3CAT/')
-def watch_TV3():
+def watch_TV3CAT():
     streamurl = 'stream_TV3CAT_FLV'
     swfurl = 'http://www.tv3.cat/ria/players/3ac/i360/Main.swf'
     pageurl = 'http://www.tv3.cat/3alacarta/#/directes/TV3CAT'
